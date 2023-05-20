@@ -5,22 +5,36 @@
             <?php Flasher::flash(); ?>
         </div>
     </div>
+    
+    <div class="row">
+        <div class="col-lg-6">
+            <button type="button" class="btn btn-primary mb-3 tombolTambahData" data-bs-toggle="modal" data-bs-target="#formMahasiswa">
+                Tambah Data Mahasiswa
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <form action= "<?= BASEURL; ?>/mahasiswa/cari" method= "post">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="cari mahasiswa.." name="keyword" id="keyword">
+                    <button class="btn btn-primary" type="submit" id="tombolCari">Cari</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-6">
-
-        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#formMahasiswa">
-            Tambah Data Mahasiswa
-        </button>
-
             <h3>Data Mahasiswa</h3>
                 <ul class="list-group">
                     <?php foreach ($data['mhs'] as $mhs) : ?>
                         <li class="list-group-item">
                             <?= $mhs['nama']; ?>
-                            <a href="<?= BASEURL; ?>/mahasiswa/hapus/<?= $mhs['id'] ?>" class="badge bg-danger text-decoration-none float-end  me-1" type="button" onclick="return confirm('yakin!')">hapus</a>
-                            <a href="<?= BASEURL; ?>/mahasiswa/detail/<?= $mhs['id'] ?>" class="badge bg-success text-decoration-none float-end me-1 tampilModalUbah" type="button" data-bs-toggle="modal" data-bs-target="#formMahasiswa">ubah</a>
-                            <a href="<?= BASEURL; ?>/mahasiswa/detail/<?= $mhs['id'] ?>" class="badge bg-primary text-decoration-none float-end me-1" type="button">detail</a>
+                            <a href="<?= BASEURL; ?>/mahasiswa/hapus/<?= $mhs['id']; ?>" class="badge bg-danger text-decoration-none float-end  me-1" type="button" onclick="return confirm('yakin!')">hapus</a>
+                            <a href="<?= BASEURL; ?>/mahasiswa/detail/<?= $mhs['id']; ?>" class="badge bg-success text-decoration-none float-end me-1 tampilModalUbah" type="button" data-bs-toggle="modal" data-bs-target="#formMahasiswa" data-id="<?= $mhs['id']; ?>">ubah</a>
+                            <a href="<?= BASEURL; ?>/mahasiswa/detail/<?= $mhs['id']; ?>" class="badge bg-primary text-decoration-none float-end me-1" type="button">detail</a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -38,6 +52,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action = "<?= BASEURL; ?>/mahasiswa/tambah" method= "post">
+                <input type="hidden" name="id" id="id">
                 <div class="modal-body"><div class="mb-3">
                     <label for="nama" class="form-label">Nama</label>
                     <div class="input-group mb-3">
